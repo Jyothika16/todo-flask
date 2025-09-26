@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            padding: 20px;
+            text-align: center;
+        }
+        .update-container {
+            background: lightblue;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color:lightblue;
+             ;
+            
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: lightcyan;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-container">
+        <h1>Update Task</h1>
+        <form method="POST">
+            <input type="text" name="task" value="{{ task }}" required>
+            <br>
+            <button type="submit">Update</button>
+        </form>
+        <p><a href="/">Back to To-Do List</a></p>
+    </div>
+</body>
+</html>

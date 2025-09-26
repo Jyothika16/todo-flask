@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: lightblue;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .todo-container {
+        background-color:red;
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 20px;
+    }
+
+    li {
+        background-color: lightcyan;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .task-text {
+        flex: 1;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    .btn-edit:hover {
+        background-color: green;
+    }
+
+    .btn-edit {
+        background-color: green; 
+        color:white;
+    }
+    
+
+    .btn-delete:hover {
+        background-color: red;
+    }
+    
+</style>
+
+</head>
+<body>
+    <h1>My To-Do List</h1>
+
+    <form action="/add" method="post">
+        <input type="text" name="task" placeholder="Enter a task" required>
+        <button type="submit">Add</button>
+    </form>
+    <!-- View Tasks Button -->
+<p style="text-align: center;">
+    <a href="/view">
+        <button type="button">View Tasks</button>
+    </a>
+</p>
+  <ul>
+    {% for task in tasks %}
+        <li>
+            <span class="task-text">{{ task }}</span>
+            <div>
+                <a href="/update/{{ loop.index0 }}">
+                    <button class="btn btn-edit"> Edit</button>
+                </a>
+                <a href="/delete/{{ loop.index0 }}">
+                    <button class="btn btn-delete"> Delete</button>
+                </a>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+
+
+</body>
+</html>
