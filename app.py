@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 tasks = []
@@ -31,7 +32,7 @@ def delete(task_id):
         tasks.pop(task_id)
     return redirect(url_for('index'))
 
-import os
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
