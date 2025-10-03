@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 tasks = []
@@ -9,8 +10,16 @@ def index():
 def add():
     task = request.form.get('task')
     if task:
-        tasks.append(task)
+        tasks.append({"content": task, "status": "Pending"})
+
     return redirect(url_for('index'))
+
+@app.route('/done/<int:task_id>')
+def done(task_id):
+    if 0 <= task_id < len(tasks):
+        tasks[task_id]['status'] = "Done"
+    return redirect(url_for('index'))
+
 @app.route('/view')
 def view():
     return render_template('view.html', tasks=tasks)
@@ -30,7 +39,15 @@ def delete(task_id):
     if 0 <= task_id < len(tasks):
         tasks.pop(task_id)
     return redirect(url_for('index'))
+@app.route('/exit')
+def exit_app():
+    os._exit(0)  # stops Flask server
+    return "Exiting..."
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
