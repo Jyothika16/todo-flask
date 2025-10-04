@@ -1,105 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My To-Do List</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: lightblue;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .todo-container {
-            background-color: white;
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        li {
-            background-color: lightgoldenrodyellow;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .task-text {
-            flex: 1;
-            text-align: center;
-            font-size: 16px;
-        }
-
-        .btn {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            margin-left: 5px;
-        }
-
-        .btn-edit { background-color: skyblue; color:white; }
-        .btn-edit:hover { background-color: darkblue; }
-
-        .btn-delete { background-color: red; color:white; }
-        .btn-delete:hover { background-color: darkred; }
-
-        .btn-done { background-color: green; color:white; }
-        .btn-done:hover { background-color: darkgreen; }
-
-        .btn-exit { background-color: gray; color:white; margin-top: 20px; }
-        .btn-exit:hover { background-color: black; }
-    </style>
+    <title>To-Do List</title>
 </head>
 <body>
-    <h1>My To-Do List</h1>
+    <h1>To-Do List</h1>
+    <form action="/add" method="post">
+        <input type="text" name="task" placeholder="Enter new task" required>
+        <button type="submit">Add Task</button>
+    </form>
 
-    <div class="todo-container">
-        <!-- Add Task Form -->
-        <form action="/add" method="post">
-            <input type="text" name="task" placeholder="Enter a task" required>
-            <button type="submit" class="btn">Add</button>
-        </form>
-
-        <!-- Task List -->
-        <ul>
-            {% for task in tasks %}
-                <li>
-                    <span class="task-text">{{ task.content }} - {{ task.status }}</span>
-                    <div>
-                        {% if task.status != 'Done' %}
-                        <a href="/done/{{ loop.index0 }}">
-                            <button class="btn btn-done">Done</button>
-                        </a>
-                        {% endif %}
-                        <a href="/update/{{ loop.index0 }}">
-                            <button class="btn btn-edit">Edit</button>
-                        </a>
-                        <a href="/delete/{{ loop.index0 }}">
-                            <button class="btn btn-delete">Delete</button>
-                        </a>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-
-        <!-- Exit Button -->
-        <a href="/exit">
-            <button class="btn btn-exit">Exit</button>
-        </a>
-    </div>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {{ task.content }} - {{ task.status }}
+                <a href="/done/{{ loop.index0 }}">Done</a>
+                <a href="/update/{{ loop.index0 }}">Update</a>
+                <a href="/delete/{{ loop.index0 }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/view">View Tasks</a>
 </body>
 </html>

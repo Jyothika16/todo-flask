@@ -2,83 +2,14 @@
 <html>
 <head>
     <title>View Tasks</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: lightblue;  
-        padding: 20px;
-    }
-
-    h1 {
-        text-align: center;
-        color: black;
-    }
-
-    form {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    input[type="text"] {
-        width: 300px;
-        padding: 10px;
-        font-size: 16px;
-    }
-
-    button {
-        padding: 10px 15px;
-        font-size: 16px;
-        background-color: lightskyblue;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: lightcyan;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-        max-width: 400px;
-        margin: auto;
-    }
-
-    li {
-        background-color: lightcyan;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-    }
-
-    a {
-        color:black;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-</style>
-
 </head>
 <body>
     <h1>All Tasks</h1>
-
     <ul>
         {% for task in tasks %}
-            <li>{{ task }}</li>
+            <li>{{ task.content }} - {{ task.status }}</li>
         {% endfor %}
     </ul>
-
-    <a href="/">Back to To-Do List</a>
+    <a href="/">Back</a>
 </body>
 </html>
-
