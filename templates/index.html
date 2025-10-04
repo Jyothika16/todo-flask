@@ -2,9 +2,17 @@
 <html>
 <head>
     <title>To-Do List</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; }
+        input { padding: 5px; }
+        button { margin-left: 5px; padding: 5px 10px; }
+        li { margin: 10px 0; }
+        .done { text-decoration: line-through; color: gray; }
+    </style>
 </head>
 <body>
     <h1>To-Do List</h1>
+
     <form action="/add" method="post">
         <input type="text" name="task" placeholder="Enter new task" required>
         <button type="submit">Add Task</button>
@@ -13,13 +21,22 @@
     <ul>
         {% for task in tasks %}
             <li>
-                {{ task.content }} - {{ task.status }}
-                <a href="/done/{{ loop.index0 }}">Done</a>
-                <a href="/update/{{ loop.index0 }}">Update</a>
-                <a href="/delete/{{ loop.index0 }}">Delete</a>
+                <span class="{{ 'done' if task.status == 'Done' else '' }}">{{ task.content }} - {{ task.status }}</span>
+                
+                <!-- Buttons for actions -->
+                <form action="/done/{{ loop.index0 }}" method="get" style="display:inline;">
+                    <button type="submit">Done</button>
+                </form>
+
+                <form action="/update/{{ loop.index0 }}" method="get" style="display:inline;">
+                    <button type="submit">Update</button>
+                </form>
+
+                <form action="/delete/{{ loop.index0 }}" method="get" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
             </li>
         {% endfor %}
     </ul>
-    <a href="/view">View Tasks</a>
 </body>
 </html>
